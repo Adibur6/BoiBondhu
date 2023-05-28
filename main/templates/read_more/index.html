@@ -1,0 +1,298 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boi Bondhu| Read-more</title>
+
+  <!--bootstrap-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
+
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="{%static 'read_more/style.css'%}" />
+  <!-- custom css file link  -->
+</head>
+
+<body>
+  <header class="header">
+    <div class="header1">
+
+      <a href="{% url 'home' %}" class="logo"> <i class="fas fa-book fa-shake" style="--fa-animation-duration: 3s;"></i>
+        BoiBondhu
+      </a>
+
+      <form name="search" method='post' action="{%url 'browsing'%}" class="search-form">
+        {%csrf_token%}
+        <input type="search" name="query" placeholder="search here..." id="search-box">
+        <a href="" onclick="submit_form(); return false;"><label for="search-box" class="fas fa-search" ></label></a>
+        
+
+     </form>
+
+      <div class="icons">
+        <div id="search-btn" class="fas fa-search"></div>
+        <a href="{%url 'requested' '1' %}" class="{% if notify %}notification{%endif%} fa-solid fa-bell">{% if notify %}<span class="badge">?</span>{%endif%}</a>
+
+        <a href="{% url 'logout'%}" title="Log-out" class="fa fa-sign-out"></a>
+        <a href="{%url 'profile'%}" title="Log-in" class="fas fa-user"></a>
+        <div id="login-btn"></div>
+        
+
+      </div>
+
+    </div>
+
+    <div class="header2">
+      <nav class="navbarg">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'how-to-swap' %}">How to swap</a>
+        <a href="{% url 'browsing' %}">Browse</a>
+        <a href="{% url 'blogs' %}">Blogs</a>
+        <a href="{% url 'about_us' %}">About</a>
+        <a href="{% url 'price_plan' %}">Price Plan</a>
+      </nav>
+    </div>
+
+  </header>
+  <!-- header section ends -->
+  <!-- bottom navbar  -->
+
+  <nav class="bottom-navbar">
+    <a href="{% url 'home' %}" class="fas fa-home"></a>
+    <a href="{% url 'browsing' %}" class="fas fa-list"></a>
+    <a href="{% url 'how-to-swap' %}" class="fa-solid fa-circle-info" title="How to swap"></a>
+    <a href="{% url 'about_us' %}" class="fas fa-comments"></a>
+    <a href="{% url 'blogs' %}" class="fas fa-blog"></a>
+    
+      <a href="{% url 'price_plan' %}" class="fas fa-coins"></a>
+    
+  </nav>
+
+  <!-- read-more  -->
+  <section class="home" id="home">
+    
+    
+    {% if msg %}
+      <h1  class="heading" id="msg"><span  >{{ msg }}</span></h1>
+    {% endif %}
+    
+    
+    <div class="card shadow-lg p-3 mb-5 bg-white rounded container">
+      <div class="container-xl px-4 mt-4">
+        <!-- Account page navigation-->
+
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="card mb-4">
+              <div class="card-body text-center bookcover">
+                <img src="{{book.img.url}}" alt="book-cover" />
+                <form method="post">
+                  {%csrf_token%}
+
+                  <button name="req" type="submit" class="btn btn-{% if book.is_recieved %}primary{% elif not book.is_pending %}primary{%elif req %}danger{%else%}primary{%endif%} red" {%if is_my_book%}disabled{%elif book.is_pending %}{%else%}disabled{% endif %}>{%if book.is_recieved %}<i class="fa-solid fa-thumbs-up"></i>Done{% elif not book.is_pending %}<i class="fa-solid fa-truck-fast"></i>Booked{%elif req%}Cancel <i class="fas fa-times"></i>{%else%} <i class="fa-solid fa-paper-plane"></i> Request{%endif%}</button>
+                </form>
+                <form method="post">
+                  {%csrf_token%}
+                  <div class="rating">
+                    <input type="radio" name="rating" value="5" id="5" /><label for="5">☆</label>
+                    <input type="radio" name="rating" value="4" id="4" /><label for="4">☆</label>
+                    <input type="radio" name="rating" value="3" id="3" /><label for="3">☆</label>
+                    <input type="radio" name="rating" value="2" id="2" /><label for="2">☆</label>
+                    <input type="radio" name="rating" value="1" id="1" /><label for="1">☆</label>
+                  </div>
+                  <hr>
+                  <button name='rated' class=" btn btn-outline-warning" type="submit">Submit my rating</button>
+                </form>
+              </div>
+            </div>
+            <div class="card mb-4 mb-lg-0">
+
+              <h3 class="text-center" style="padding: 1rem;">Share</h3>
+              <hr>
+              <div class="card-body p-0">
+                <ul class="list-group list-group-flush rounded-3">
+                  <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <i class="fab fa-facebook-f fa-lg" style="color: #3b5998"></i>
+                    <a href="url">Facebook</a>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <i class="fab fa-instagram fa-lg" style="color: #ac2bac"></i>
+                    <a href="url">Instagram</a>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <i class="fab fa-twitter fa-lg" style="color: #55acee"></i>
+                    <a href="url">Twitter</a>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <i class="fab fa-pinterest fa-lg" style="color: red"></i>
+                    <a href="url">Pinterest</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card mb-4">
+              <div class="card-body">
+                <h1 style="font-size:4rem; color:#219150;">{{book.bookname}}</h1>
+                <h2 class="text-muted">by <u>{{book.author}}</u></h2>
+                <h2 class="text-muted"><i>{{book.details}}</i></h2>
+                <div class="star" style="text-align:end;">
+                    <span class="fa fa-star {%if rating < 1 %} un{%endif%} checked"></span>
+                    <span class="fa fa-star {%if rating < 2 %} un{%endif%}checked"></span>
+                    <span class="fa fa-star {%if rating < 3 %} un{%endif%}checked"></span>
+                    <span class="fa fa-star {%if rating < 4 %} un{%endif%}checked"></span>
+                    <span class="fa fa-star {%if rating < 5 %} un{%endif%}checked"></span>
+                    <span>{{rating}} star</span>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Catagory</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{book.category}}</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Publisher</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{book.publisher}}</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Publication Date</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{book.pubdate}}</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Edition</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{book.edition}}<sup>th</sup> edition</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Cover</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{%if book.paperback %}Paper back{% else %}Hard cover{% endif %}</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Age</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{book.age}} months</p>
+                  </div>
+                </div>
+                <hr>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="card shadow-lg mb-4 mb-md-0" style="padding:1rem;">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{book.owner.email}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Phone</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{book.owner.profile.phone}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Location</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{book.owner.profile.location}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Profession</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{book.owner.profile.profession}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Workplace</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{book.owner.profile.workplace}}</p>
+                    </div>
+                  </div>
+                  <hr>
+
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card shadow-lg mb-4 mb-md-0">
+                  <div class="card-body text-center">
+                    <div class="card-body text-center">
+                      <h4>Shared by</h4>
+                    </div>
+                    <img class="img-account-profile rounded-circle mb-2"
+                      src="{%if book.owner.profile_image.img.url %}{{book.owner.profile_image.img.url}}{%else%}{%static 'image/default_profile_pic.png'%}{%endif%}"
+                      alt="avatar" class="rounded-circle img-fluid"
+                      style="width: 100px;border-style: solid; border-color: #219150;" />
+                    <h3 class="text-muted">{{book.owner.profile.first_name}} {{book.owner.profile.last_name}}</h3>
+                    <h5 class="text-muted">{{book.owner.profile.location}}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Edit profile form ends here -->
+  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+  <!-- custom js file link  -->
+  <script src="{%static 'read_more/script.js'%}"></script>
+</body>
+
+</html>

@@ -1,0 +1,369 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Boi Bondhu| Browsing Page</title>
+
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="{% static 'browsing/style.css' %}">
+   <!-- custom css file link  -->
+
+</head>
+
+<body>
+   <header class="header">
+
+      <div class="header1">
+
+         <a href="{% url 'home' %}" class="logo"> <i class="fas fa-book fa-shake"
+               style="--fa-animation-duration: 3s;"></i> BoiBondhu
+         </a>
+
+         <form name="search" method='post' action="{%url 'browsing'%}" class="search-form">
+            {%csrf_token%}
+            <input type="search" name="query" placeholder="search here..." id="search-box">
+            <a href="" onclick="submit_form(); return false;"><label for="search-box" class="fas fa-search" ></label></a>
+            
+
+         </form>
+
+         <div class="icons">
+            <div id="search-btn" class="fas fa-search"></div>
+            {% if login %}
+            <a href="{%url 'requested' '1' %}" class="{% if notify %}notification{%endif%} fa-solid fa-bell">{% if notify %}<span class="badge">?</span>{%endif%}</a>
+
+            <a href="{% url 'logout'%}" title="Log-out" class="fa fa-sign-out"></a>
+            <a href="{%url 'profile'%}" title="Log-in" class="fas fa-user"></a>
+            <div id="login-btn"></div>
+            {% else %}
+            <button href="#" class="bton" id="login-btn"><i class="fa-solid fa-arrow-right-to-bracket"></i> Log in</button>
+            {% endif %}
+
+         </div>
+
+      </div>
+
+      <div class="header2">
+         <nav class="navbarg">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'how-to-swap' %}">How to swap</a>
+            <a href="{% url 'browsing' %}">Browse</a>
+            <a href="{% url 'blogs' %}">Blogs</a>
+            <a href="{% url 'about_us' %}">About</a>
+            {%if login %}
+            <a href="{% url 'price_plan' %}">Price Plan</a>
+            {%endif%}
+         </nav>
+      </div>
+
+   </header>
+   <!-- header section ends -->
+
+   <!-- bottom navbar  -->
+
+   <nav class="bottom-navbar">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <a href="{% url 'browsing' %}" class="fas fa-list"></a>
+      <a href="{% url 'how-to-swap' %}" class="fa-solid fa-circle-info" title="How to swap"></a>
+      <a href="{% url 'about_us' %}" class="fas fa-comments"></a>
+      <a href="{% url 'blogs' %}" class="fas fa-blog"></a>
+      {%if login %}
+      <a href="{% url 'price_plan' %}" class="fas fa-coins"></a>
+      {%endif%}
+   </nav>
+
+   <!-- login form  -->
+
+   <div class="login-form-container">
+      <div id="close-login-btn" class="fas fa-times"></div>
+
+      <form action="{%url 'home'%}" method="POST">
+         {% csrf_token %}
+         <h3>sign in</h3>
+         <span>Username</span>
+         <input type="text" name="username" class="box" placeholder="Enter your username">
+         <span>Password</span>
+         <input type="password" name="password" class="box" placeholder="Enter your password">
+         <div class="checkbox">
+            <input type="checkbox" name="" id="remember-me">
+            <label for="remember-me"> remember me</label>
+         </div>
+         <input type="submit" name="login" value="login" class="bton">
+         <p>don't have an account ? <a href="#" id="signup-btn2">create one</a></p>
+      </form>
+   </div>
+
+   <!-- Browsing section starts  -->
+
+   <section class="home row " id="home">
+      {% if msg %}
+      <h1  class="heading" id="msg"><span  >{{ msg }}</span></h1>
+      {% endif %}
+      <div class="card col-10 shadow-lg p-3 mb-5 bg-white rounded container-fluid">
+         <!--Main layout-->
+         <div class="container-xl px-4 mt-4">
+            <nav class="nav nav-borders">
+               <a class="nav-link {%if category == 'all' %}active ms-0{% else %}{% endif %}"
+                  href="{%url 'browsing'%}">Trending</a>
+               <div class="nav-link dropdown">
+                  <button class="dropbtn ">Fiction
+                     <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-content">
+                     <a href="{%url 'browsing2' 'Fantasy' '1' %}">Fantasy</a>
+                     <a href="{%url 'browsing2' 'Adventure' '1' %}">Adventure</a>
+                     <a href="{%url 'browsing2' 'Romance' '1' %}">Romance</a>
+                     <a href="{%url 'browsing2' 'Contempory' '1' %}">Contemporary</a>
+                     <a href="{%url 'browsing2' 'Dytopian' '1' %}">Dystopian</a>
+                     <a href="{%url 'browsing2' 'Mystery' '1' %}">Mystery</a>
+                     <a href="{%url 'browsing2' 'Horror' '1' %}">Horror</a>
+                     <a href="{%url 'browsing2' 'Thriller' '1' %}">Thriller</a>
+                     <a href="{%url 'browsing2' 'Paranormal' '1' %}">Paranormal</a>
+                     <a href="{%url 'browsing2' 'Historical-fiction' '1' %}">Historical fiction</a>
+                     <a href="{%url 'browsing2' 'Science-fiction' '1' %}">Science fiction</a>
+                     <a href="{%url 'browsing2' 'Children' '1' %}">Children</a>
+                  </div>
+               </div>
+               <div class="nav-link dropdown">
+                  <button class="dropbtn">Non-Fiction
+                     <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-content">
+                     <a href="{%url 'browsing2' 'Memoir' '1' %}">Memoir</a>
+                     <a href="{%url 'browsing2' 'Cookbook' '1' %}">Cookbook</a>
+                     <a href="{%url 'browsing2' 'Art' '1' %}">Art</a>
+                     <a href="{%url 'browsing2' 'Self-help' '1' %}">Self-help</a>
+                     <a href="{%url 'browsing2' 'Development' '1' %}">Development</a>
+                     <a href="{%url 'browsing2' 'Motivational' '1' %}">Motivational</a>
+                     <a href="{%url 'browsing2' 'Health' '1' %}">Health</a>
+                     <a href="{%url 'browsing2' 'History' '1' %}">History</a>
+                     <a href="{%url 'browsing2' 'Travel' '1' %}">Travel</a>
+                     <a href="{%url 'browsing2' 'Guide' '1' %}">Guide/ How-to</a>
+                     <a href="{%url 'browsing2' 'Families&Relationship' '1' %}">Families & Relationship</a>
+                     <a href="{%url 'browsing2' 'Humor' '1' %}">Humor</a>
+                  </div>
+               </div>
+
+            </nav>
+            <!--Section: book list-->
+            <div class="my-book-list">
+               {% for is_my_book,book,req,a in book_instances%}
+
+               <br>
+               <div class="row search-book">
+                  <div class="col-sm bookcover d-flex">
+                     <img src="{{book.img.url}}" alt="{{book.img.name}}">
+                  </div>
+                  <div class="col-sm">
+
+                     <div class="book-name">
+                        <h1>{{book.bookname}}</h1>
+                        <h3 style="font-weight: 300">{{book.author}}</h3>
+                     </div>
+                     
+                     <div class="details">
+                        <p class="text-muted ">First Published in {{book.pubdate|slice:'0:4'}}<br>{{book.edition}}th edition {%if book.paperback %}Paper back{% else %}Hard cover{% endif %}</p>
+                        <div class="row">
+                           <div class="col-4 star">
+                              <span class="fa fa-star {%if a.0 < 1 %} un{%endif%}checked"></span>
+                              <span class="fa fa-star {%if a.0 < 2 %} un{%endif%}checked"></span>
+                              <span class="fa fa-star {%if a.0 < 3 %} un{%endif%}checked"></span>
+                              <span class="fa fa-star {%if a.0 < 4 %} un{%endif%}checked"></span>
+                              <span class="fa fa-star {%if a.0 < 5 %} un{%endif%}checked"></span>
+                              <span>{{a.0}} star</span>
+                           </div>
+                           <div class="col coin">
+                              <img src="{%static 'image/dollar.png'%}" alt="coins">
+                              <span>{{ a.1 }} coins</span>
+                           </div>
+                        </div>
+                        <div class="read-more">
+                           <a href="{%if login%}{% url 'read_more' book.id %}{% else %}#{% endif %}" target="__blank">Read
+                              More</a>
+                        </div>
+                        <hr>
+                        <div class="row">
+                           <div class="col-sm">
+                              <form method="post" action="{% url 'read_more' book.id %}">
+                                    {% csrf_token %}
+                                 <button name="req" type="submit"
+                                 class="btn btn-{% if not book.is_pending %}primary{%elif req  %}danger{%else%}primary{%endif%}" {%if is_my_book or not login%}disabled{%elif book.is_pending %}{%else%}disabled{% endif %}>{% if not book.is_pending %}<i class="fa-solid fa-truck-fast"></i>Booked{% elif req %}Cancel <i class="fas fa-times"></i>{%else%}<i class="fa-solid fa-paper-plane"></i> Request{%endif%}</button>
+                                 </form>
+                              </div>
+                              <div class="col-sm">
+                                 <form method="post" action="{% url 'browsing2' category p.number %}">
+                                    {% csrf_token %}
+                                    <button type="submit" name="not-interested" value="{{book.id}}"class="btn btn-primary not-interested"{%if not login %} disabled{% endif %}>
+                                       <i class="fa-solid fa-ban"></i> Not Interested 
+                                    </button>
+                                 </form>
+                              </div>
+                           </div>
+                     </div>
+                  </div>
+               </div>
+
+
+
+
+
+
+
+
+
+
+               {% endfor %}
+            </div>
+         </div>
+         <!-- Pagination -->
+         <nav class="my-4" aria-label="...">
+            <ul class="pagination pagination-circle justify-content-center">
+               {%if p.has_previous%}
+               <li class="page-item">
+                  <a class="page-link" href="{%url 'browsing2' category '1'%}" tabindex="-1"
+                     aria-disabled="true">first</a>
+               </li>
+               <li class="page-item"><a class="page-link"
+                     href="{%url 'browsing2' category p.previous_page_number%}">{{p.previous_page_number}}</a></li>
+               {%endif%}
+               <li class="page-item active" aria-current="page">
+                  <a class="page-link" href="#">{{p.number}} <span class="sr-only">(current)</span></a>
+               </li>
+               {%if p.has_next%}
+               <li class="page-item"><a class="page-link"
+                     href="{%url 'browsing2' category p.next_page_number%}">{{p.next_page_number}}</a></li>
+               <li class="page-item">
+                  <a class="page-link" href="{%url 'browsing2' category p.paginator.num_pages%}">last</a>
+               </li>
+               {%endif%}
+            </ul>
+         </nav>
+      </div>
+   </section>
+
+
+   <!-- browsing section ense  -->
+
+   <!-- icons section starts  -->
+
+   <section class="icons-container">
+
+      <div class="icons">
+         <i class="fas fa-user-plus"></i>
+         <div class="content">
+            <h3>It's easy</h3>
+            <p>very convenient</p>
+         </div>
+      </div>
+
+      <div class="icons">
+         <i class="fas fa-lock fa-shake"></i>
+         <div class="content">
+            <h3>secure sharing </h3>
+            <p>trusted members</p>
+         </div>
+      </div>
+
+      <div class="icons">
+         <i class="fas fa-sync fa-spin"></i>
+         <div class="content">
+            <h3>Track books</h3>
+            <p>location sharing</p>
+         </div>
+      </div>
+
+      <div class="icons ">
+         <i class="fas fa-headset "></i>
+         <div class="content">
+            <h3>24/7 support</h3>
+            <p>call us anytime</p>
+         </div>
+      </div>
+
+
+
+   </section>
+   <!-- FOOTER -->
+   <footer class="w-100 py-4 flex-shrink-0">
+      <div class="container py-4">
+         <div class="row gy-4 gx-5">
+            <div class="col-lg-4 col-md-6">
+               <h5 class="h1 text-white">Our locations</h5>
+               <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Chittagong">
+                  <i class="fas fa-map-marker-alt"></i> Chittagong
+               </a>
+               <p>
+                  <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+                  <a href="https://www.twitter.com/" class="fab fa-twitter"></a>
+                  <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+                  <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
+                  <a href="https://www.pinterest.com/" class="fab fa-pinterest"></a>
+               </p>
+               <p class="small text-muted mb-0">
+                  &copy; Copyrights. All rights reserved.
+               </p>
+            </div>
+            <div class="col-lg-2 col-md-6">
+               <h5 class="text-white mb-3">Quick links</h5>
+               <ul class="list-unstyled text-mut">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Get started</a></li>
+                  <li><a href="#">FAQ</a></li>
+               </ul>
+            </div>
+            <div class="col-lg-2 col-md-6">
+               <h5 class="text-white mb-3">Contributor</h5>
+               <ul class="list-unstyled">
+                  <li><i class="fa-solid fa-person"></i> Ashfaqur Rahman Adib </a></li>
+                  <li><i class="fa-solid fa-person"></i> Tahlil Abrar </a></li>
+                  <li><i class="fa-solid fa-person-dress"></i> Zerin Shaima Meem </a></li>
+               </ul>
+            </div>
+            <div class="col-lg-4 col-md-6">
+               <h5 class="text-white mb-3">Newsletter</h5>
+               <p class="small text-mut">
+                 Send us your valuable constructive feedback.
+               </p>
+               <form action="#">
+                 <div class="input-group mb-3">
+                   <input class="form-control" type="text" placeholder="Send your feedback"
+                     aria-label="Recipient's username" aria-describedby="button-addon2" />
+                   <button class="btn " id="button-addon2" type="button" style="background-color: #337ab7; color: white;">
+                     <i class="fas fa-paper-plane"></i>
+                   </button>
+                 </div>
+               </form>
+             </div>
+         </div>
+      </div>
+   </footer>
+
+
+   <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+   <!-- custom js file link  -->
+   <script src="{% static 'browsing/script.js' %}"></script>
+</body>
+
+</html>

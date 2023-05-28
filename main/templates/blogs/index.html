@@ -1,0 +1,273 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Boi Bondhu| Blog Page</title>
+
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   <link rel="stylesheet" href="{% static 'blogs/style.css' %}">
+   <!-- custom css file link  -->
+
+</head>
+
+<body>
+   <header class="header">
+
+      <div class="header1">
+
+         <a href="{% url 'home' %}" class="logo"> <i class="fas fa-book fa-shake"
+               style="--fa-animation-duration: 3s;"></i> BoiBondhu
+         </a>
+
+         <form name="search" method='post' action="{%url 'browsing'%}" class="search-form">
+            {%csrf_token%}
+            <input type="search" name="query" placeholder="search here..." id="search-box">
+            <a href="" onclick="submit_form(); return false;"><label for="search-box" class="fas fa-search" ></label></a>
+            
+
+         </form>
+
+         <div class="icons">
+            <div id="search-btn" class="fas fa-search"></div>
+            {% if login %}
+            <a href="{%url 'requested' '1' %}" class="{% if notify %}notification{%endif%} fa-solid fa-bell">{% if notify %}<span class="badge">?</span>{%endif%}</a>
+            <a href="{% url 'logout'%}" title="Log-out" class="fa fa-sign-out"></a>
+            <a href="{%url 'profile'%}" title="Log-in" class="fas fa-user"></a>
+            <div id="login-btn"></div>
+            {% else %}
+            <button href="#" class="bton" id="login-btn"><i class="fa-solid fa-arrow-right-to-bracket"></i> Log in</button>
+            {% endif %}
+        </div>
+
+      </div>
+
+      <div class="header2">
+         <nav class="navbarg">
+            <a href="{% url 'home' %}">home</a>
+            <a href="{% url 'how-to-swap' %}">how to swap</a>
+            <a href="{% url 'browsing' %}">browse</a>
+            <a href="{% url 'blogs' %}">blogs</a>
+            <a href="{% url 'about_us' %}">about</a>
+            {%if login %}
+            <a href="{% url 'price_plan' %}">Price Plan</a>
+            {%endif%}
+         </nav>
+      </div>
+
+   </header>
+   <!-- header section ends -->
+
+   <!-- bottom navbar  -->
+
+   <nav class="bottom-navbar">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <a href="{% url 'browsing' %}" class="fas fa-list"></a>
+      <a href="{% url 'how-to-swap' %}" class="fas fa-tags"></a>
+      <a href="{% url 'about_us' %}" class="fas fa-comments"></a>
+      <a href="{% url 'blogs' %}" class="fas fa-blog"></a>
+      {%if login %}
+      <a href="{% url 'price_plan' %}" class="fas fa-coins"></a>
+      {%endif%}
+   </nav>
+
+   <!-- login form  -->
+
+   <div class="login-form-container">
+
+      <div id="close-login-btn" class="fas fa-times"></div>
+
+      <form action="{%url 'home'%}" method="POST">
+         {% csrf_token %}
+         <h3>sign in</h3>
+         <span>Username</span>
+         <input type="text" name="username" class="box" placeholder="Enter your username" id="">
+         <span>Password</span>
+         <input type="password" name="password" class="box" placeholder="Enter your password" id="">
+         <div class="checkbox">
+            <input type="checkbox" name="" id="remember-me">
+            <label for="remember-me"> remember me</label>
+         </div>
+         <input type="submit" name="login" value="login" class="bton">
+         <p>don't have an account ? <a href="#" id="signup-btn2">create one</a></p>
+      </form>
+
+   </div>
+
+   <!-- blog  section starts  -->
+
+   <section class="blogs" id="blogs">
+      <h1 class="heading"><span>Handpicked Blogs</span></h1>
+
+      <div class="swiper blogs-slider">
+         <div class="swiper-wrapper">
+
+
+            <div class="swiper-slide box">
+               <div class="image">
+                  <img
+                     src="https://i.guim.co.uk/img/media/e64c6667173cb0c9887e560e1fad26d3a54bdd36/0_0_1201_721/master/1201.jpg?width=1300&quality=45&fit=max&dpr=2&s=d00bae8df7bd19aebdd360512d2be1e5"
+                     alt="" />
+               </div>
+               <div class="content">
+                  <h3>50 new books for a great escape</h3>
+                  <p>
+                     From pageturning thrillers and comic novels to an antidote to doomscrolling – our pick of the best
+                     new fiction and nonfiction. Plus 10 brilliant paperbacks, and 10 great reads for children and teens
+                  </p>
+                  <a href="https://www.theguardian.com/books/2022/jun/25/summer-reading-the-50-hottest-new-books-for-a-great-escape"
+                     class="bton">read more</a>
+               </div>
+            </div>
+
+            <div class="swiper-slide box">
+               <div class="image">
+                  <img
+                     src="https://i.guim.co.uk/img/media/d5731a0b2e063f4f7c495ed21977f5d1ed26a038/0_86_4104_2462/master/4104.jpg?width=620&quality=45&fit=max&dpr=2&s=18d7255650951766eaac0de7f2cfde83"
+                     alt="" />
+               </div>
+               <div class="content">
+                  <h3>Hang Gliders with Saxophones by Ian Pople</h3>
+                  <p>
+                     Ian Pople is a quietly meticulous poet with a substantial body of work deserving far wider
+                     visibility than it’s so far received.
+                  </p>
+                  <a href="https://www.theguardian.com/books/booksblog/2022/jun/13/poem-of-the-week-hang-gliders-with-saxophones-by-ian-pople"
+                     class="bton">read more</a>
+               </div>
+            </div>
+
+            <div class="swiper-slide box">
+               <div class="image">
+                  <img
+                     src="https://i.guim.co.uk/img/media/fb6ab32d3add9689f3cacb37932723889f8dc262/0_0_6850_4677/master/6850.jpg?width=1300&quality=45&fit=max&dpr=2&s=90d473cda7e695ccc830fdce84730639"
+                     alt="" />
+               </div>
+               <div class="content">
+                  <h3>the 30 best holiday reads</h3>
+                  <p>
+                     From an evocative story set in a Trinidad graveyard to a riveting exposé of the Sacklers… Novelists
+                     including Johny Pitts, Monica Ali and Nina Stibbe on their essential holiday books
+                  </p>
+                  <a href="https://www.theguardian.com/books/2022/jul/02/summer-reading-30-best-holiday-reads-authors-critics"
+                     class="bton">read more</a>
+               </div>
+            </div>
+
+            <div class="swiper-slide box">
+               <div class="image">
+                  <img
+                     src="https://i.guim.co.uk/img/media/dddd6cd48b3a4a16c59ebf9738aeceedd3cb2baa/197_552_6089_3655/master/6089.jpg?width=1020&quality=45&fit=max&dpr=2&s=d5e194f3b755835f462f128208b7a259"
+                     alt="" />
+               </div>
+               <div class="content">
+                  <h3>Sacred Nature by Karen Armstrong review</h3>
+                  <p>
+                     The former nun argues that reconnecting with the spiritual side of nature could help us contend
+                     with the climate crisis
+                  </p>
+                  <a href="https://www.theguardian.com/books/2022/jul/13/sacred-nature-by-karen-armstrong-review-back-to-the-garden"
+                     class="bton">read more</a>
+               </div>
+            </div>
+
+            <div class="swiper-slide box">
+               <div class="image">
+                  <img
+                     src="https://i.guim.co.uk/img/media/e83f0cdede9a249048da1439aecb06314232b8a9/0_0_6720_4032/master/6720.jpg?width=620&quality=45&fit=max&dpr=2&s=c82756e2f71481dacce2d985a7fddf3f"
+                     alt="" />
+               </div>
+               <div class="content">
+                  <h3>Birdgirl by Mya-Rose Craig review</h3>
+                  <p>
+                     How birdwatching helped an extraordinary young woman and her family through testing times
+                  </p>
+                  <a href="https://www.theguardian.com/books/2022/jul/14/birdgirl-by-mya-rose-craig-review-a-prodigy-takes-flight"
+                     class="bton">read more</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+
+
+
+
+   <!-- FOOTER -->
+   <!-- FOOTER -->
+   <footer class="w-100 py-4 flex-shrink-0">
+      <div class="container py-4">
+         <div class="row gy-4 gx-5">
+            <div class="col-lg-4 col-md-6">
+               <h5 class="h1 text-white">Our locations</h5>
+               <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Chittagong">
+                  <i class="fas fa-map-marker-alt"></i> Chittagong
+               </a>
+               <p>
+                  <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+                  <a href="https://www.twitter.com/" class="fab fa-twitter"></a>
+                  <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+                  <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
+                  <a href="https://www.pinterest.com/" class="fab fa-pinterest"></a>
+               </p>
+               <p class="small text-muted mb-0">
+                  &copy; Copyrights. All rights reserved.
+               </p>
+            </div>
+            <div class="col-lg-2 col-md-6">
+               <h5 class="text-white mb-3">Quick links</h5>
+               <ul class="list-unstyled text-mut">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Get started</a></li>
+                  <li><a href="#">FAQ</a></li>
+               </ul>
+            </div>
+            <div class="col-lg-2 col-md-6">
+               <h5 class="text-white mb-3">Contributor</h5>
+               <ul class="list-unstyled">
+                  <li><i class="fa-solid fa-person"></i> Ashfaqur Rahman Adib </a></li>
+                  <li><i class="fa-solid fa-person"></i> Tahlil Abrar </a></li>
+                  <li><i class="fa-solid fa-person-dress"></i> Zerin Shaima Meem </a></li>
+               </ul>
+            </div>
+            <div class="col-lg-4 col-md-6">
+               <h5 class="text-white mb-3">Newsletter</h5>
+               <p class="small text-mut">
+                  Send us your valuable constructive feedback.
+               </p>
+               <form action="#">
+                  <div class="input-group mb-3">
+                     <input class="form-control" type="text" placeholder="Send your feedback"
+                        aria-label="Recipient's username" aria-describedby="button-addon2" />
+                     <button class="btn btn-primary" id="button-addon2" type="button">
+                        <i class="fas fa-paper-plane"></i>
+                     </button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </footer>
+
+   <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"></script>
+   <!-- custom js file link  -->
+   <script src="{% static 'blogs/script.js' %}"></script>
+</body>
+
+</html>

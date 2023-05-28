@@ -1,0 +1,250 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boi Bondhu| How To Swap</title>
+
+  <!--bootstrap-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="{% static 'how-to-swap/style.css' %}" />
+  <!-- custom css file link  -->
+</head>
+
+<body>
+  <header class="header">
+    <div class="header1">
+      <a href="{% url 'home' %}" class="logo">
+        <i class="fas fa-book fa-shake" style="--fa-animation-duration: 3s"></i>
+        BoiBondhu
+      </a>
+
+      <form name="search" method='post' action="{%url 'browsing'%}" class="search-form">
+        {%csrf_token%}
+        <input type="search" name="query" placeholder="search here..." id="search-box">
+        <a href="" onclick="submit_form(); return false;"><label for="search-box" class="fas fa-search" ></label></a>
+        
+
+     </form>
+
+      <div class="icons">
+        <div id="search-btn" class="fas fa-search"></div>
+        {% if login %}
+        <a href="{%url 'requested' '1' %}" class="{% if notify %}notification{%endif%} fa-solid fa-bell">{% if notify %}<span class="badge">?</span>{%endif%}</a>
+        <a href="{% url 'logout'%}" title="Log-out" class="fa fa-sign-out"></a>
+        <a href="{%url 'profile'%}" title="Log-in" class="fas fa-user"></a>
+        <div id="login-btn"></div>
+        {% else %}
+        <button href="#" class="bton" id="login-btn"><i class="fa-solid fa-arrow-right-to-bracket"></i> Log in</button>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="header2">
+      <nav class="navbarg">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'how-to-swap' %}">How to swap</a>
+        <a href="{% url 'browsing' %}">Browse</a>
+        <a href="{% url 'blogs' %}">Blogs</a>
+        <a href="{% url 'about_us' %}">About</a>
+        {%if login %}
+            <a href="{% url 'price_plan' %}">Price Plan</a>
+        {%endif%}
+      </nav>
+    </div>
+  </header>
+  <!-- header section ends -->
+
+  <!-- bottom navbar  -->
+
+  <nav class="bottom-navbar">
+    <a href="{%url 'home'%}" class="fas fa-home"></a>
+    <a href="{% url 'browsing' %}" class="fas fa-list"></a>
+    <a href="{% url 'how-to-swap' %}" class="fas fa-tags"></a>
+    <a href="{% url 'about_us' %}" class="fas fa-comments"></a>
+    <a href="{% url 'blogs' %}" class="fas fa-blog"></a>
+    {%if login %}
+      <a href="{% url 'price_plan' %}" class="fas fa-coins"></a>
+    {%endif%}
+  </nav>
+
+  <!-- login form  -->
+
+  <div class="login-form-container">
+    <div id="close-login-btn" class="fas fa-times"></div>
+
+    <form action="{%url 'home'%}" method="POST">
+      {% csrf_token %}
+      <h3>sign in</h3>
+      <span>Username</span>
+      <input type="text" name="username" class="box" placeholder="Enter your username" id="">
+      <span>Password</span>
+      <input type="password" name="password" class="box" placeholder="Enter your password" id="">
+      <div class="checkbox">
+        <input type="checkbox" name="" id="remember-me">
+        <label for="remember-me"> remember me</label>
+      </div>
+      <input type="submit" name="login" value="login" class="bton">
+      <p>don't have an account ? <a href="#" id="signup-btn2">create one</a></p>
+    </form>
+  </div>
+
+  <!-- how to swap starts  -->
+  <section class="home" id="home">
+    <h1 class="heading"><span>How to Swap</span></h1>
+    <div class="card shadow-lg p-3 mb-5 bg-white rounded container">
+      <div class="row">
+        <div class="col-sm d-flex justify-content-center ">
+          <h1 style="font-size:60px;">Step</h1>
+          <h1 style="font-size:500px;">1</h1>
+        </div>
+        <div class="col-sm">
+          <h3 style="font-size:28px;">Type In</h3>
+          <p style="font-size:15px;">Go to your profile, click the button “Add books” and then type in the details of
+            your book.
+            As soon as we receive all the information about your book, it will be available in the browsing page, and
+            other users can send requests for this book.</p>
+        </div>
+        <div class="col-6">
+          <img src="{% static 'image/step1.webp' %}" alt="" width="100%">
+        </div>
+      </div>
+
+      <div class="row p-3 mb-2 bg-success text-white">
+        <div class="col-sm">
+          <h1 style="font-size:60px;">Step</h1>
+          <h1 style="font-size:500px;">2</h1>
+        </div>
+
+        <div class="col-8">
+          <div class="row">
+            <h3 style="font-size:28px;">Receive Request</h3>
+            <p style="font-size:15px;">Check the notification bell if you've received any book request. Once you get a
+              book request, you can either decline or approve that request. If you approve the user request, after a
+              successful delivery, you will receive an estimated amount of coins.</p>
+          </div>
+          <div class="row">
+            <img src="{% static 'image/step2.jpg' %}" alt="" width="100%">
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-6">
+          <img src="{% static 'image/step3.jpg' %}" alt="" width="100%">
+        </div>
+
+        <div class="col-sm">
+          <h3 style="font-size:28px;">Ask For Books</h3>
+          <p style="font-size:15px;">Scroll through the browsing page, or search by name of specific book. If you find any book interesting, and you have sufficient coins to purchase it, send a request. You can cancel your request, as long as the owner won’t accept your request. Once the owner accepts your request, you will find the book in your waiting list.  </p>
+        </div>
+        <div class="col-sm">
+          <h1 style="font-size:60px;">Step</h1>
+          <h1 style="font-size:500px;">3</h1>
+        </div>
+      </div>
+
+      <div class="row p-3 mb-2 bg-success text-white">
+        <div class="col-sm">
+          <h1 style="font-size:60px;">Step</h1>
+          <h1 style="font-size:500px;">4</h1>
+        </div>
+        <div class="col-sm">
+          <h3 style="font-size:28px;">Mail Your Books</h3>
+          <p style="font-size:15px;">After confirming the book request, the sender will mail/ deliver the book towards the receiver. While the book is in this delivery process it will show up in the pending list for the sender and waiting list for the receiver. 
+            Once the receiver gets the book and he confirms it by pressing successfully, the sender gets his reward (specified coins) and the process ends here.
+            </p>
+        </div>
+
+        <div class="col-6 ">
+          <img src="{% static 'image/step4.png' %}" alt="" width="100%">
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+  <!-- home section ense  -->
+
+  <!-- FOOTER -->
+  <footer class="w-100 py-4 flex-shrink-0">
+    <div class="container py-4">
+      <div class="row gy-4 gx-5">
+        <div class="col-lg-4 col-md-6">
+          <h5 class="h1 text-white">Our locations</h5>
+          <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Chittagong">
+            <i class="fas fa-map-marker-alt"></i> Chittagong
+          </a>
+          <p>
+            <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+            <a href="https://www.twitter.com/" class="fab fa-twitter"></a>
+            <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+            <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
+            <a href="https://www.pinterest.com/" class="fab fa-pinterest"></a>
+          </p>
+          <p class="small text-muted mb-0">
+            &copy; Copyrights. All rights reserved.
+          </p>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5 class="text-white mb-3">Quick links</h5>
+          <ul class="list-unstyled text-mut">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Get started</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5 class="text-white mb-3">Contributor</h5>
+          <ul class="list-unstyled">
+            <li><i class="fa-solid fa-person"></i> Ashfaqur Rahman Adib </a></li>
+            <li><i class="fa-solid fa-person"></i> Tahlil Abrar </a></li>
+            <li><i class="fa-solid fa-person-dress"></i> Zerin Shaima Meem </a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h5 class="text-white mb-3">Newsletter</h5>
+          <p class="small text-mut">
+            Send us your valuable constructive feedback.
+          </p>
+          <form action="#">
+            <div class="input-group mb-3">
+              <input class="form-control" type="text" placeholder="Send your feedback"
+                aria-label="Recipient's username" aria-describedby="button-addon2" />
+              <button class="btn btn-primary" id="button-addon2" type="button">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+  <!-- custom js file link  -->
+  <script src="{% static 'how-to-swap/script.js' %}"></script>
+</body>
+
+</html>

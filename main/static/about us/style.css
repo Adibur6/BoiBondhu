@@ -1,0 +1,125 @@
+/* about us css */
+.about{
+    background: url(../image/banner-bg.jpg) ;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.social-link {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    border-radius: 50%;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+  }
+  
+  .social-link:hover,
+  .social-link:focus {
+    background: #ddd;
+    text-decoration: none;
+    color: #555;
+  }
+
+
+  
+footer a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+footer a:hover,
+footer a:focus {
+    text-decoration: none;
+}
+
+footer .form-control {
+    background: white;
+    border-color: #545454;
+}
+
+footer .form-control:focus {
+    background: white;
+   
+}
+
+footer {
+    background: var(--green);
+    font-size: 200%;
+}
+.row{
+    margin: 0;
+}
+.col{
+    margin:5%;
+}
+.headingg{
+    background-color: #c0dc8f;
+}
+.col1{
+    width:40%;
+}
+.col1 img{
+    width: 100%;
+    height: 100%;
+}
+
+.col2{
+    width: 60%;
+    background-color: #c0dc8f;
+    padding-top: 5%;
+    text-align: left;
+}
+.col2 h1{
+    color: white;
+    font-size: 50px;
+    text-shadow: 2px 2px 4px #000000;
+}
+.col2 h1:hover {
+    transform: scale(.9);
+}
+
+.writeup p{
+    text-transform: none;
+    font-size: 20px;
+}
+.picture img{
+    border: 8px solid white;
+    box-shadow: 2px 2px 4px #000000;
+}
+
+.video iframe{
+    border: 8px solid white;
+    box-shadow: 2px 2px 4px #000000;
+}
+
+
+
+@media (max-width:768px) {
+
+    .col2 h1{
+        font-size: 30px;
+    }
+
+}
+
+.notification {
+    position: relative;
+    display: inline-block;
+}
+.notification .badge {
+    position: absolute;
+    top: -9px;
+    right: -10px;
+    padding: 2px 6px;
+    border-radius: 100%;
+    font-size: small;
+    background: red;
+    color: white;
+}

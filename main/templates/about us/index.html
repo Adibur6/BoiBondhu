@@ -1,0 +1,322 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boi Bondhu| About </title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="{%static 'about us/style.css'%}">
+    <link rel="stylesheet" href="{% static 'home/style.css'%}">
+
+    <!-- custom css file link  -->
+
+</head>
+
+<body>
+   <header class="header">
+    <div class="header1">
+      <a href="{% url 'home' %}" class="logo">
+        <i class="fas fa-book fa-shake" style="--fa-animation-duration: 3s"></i>
+        BoiBondhu
+      </a>
+
+      <form name="search" method='post' action="{%url 'browsing'%}" class="search-form">
+        {%csrf_token%}
+        <input type="search" name="query" placeholder="search here..." id="search-box">
+        <a href="" onclick="submit_form(); return false;"><label for="search-box" class="fas fa-search" ></label></a>
+        
+
+     </form>
+
+      <div class="icons">
+        <div id="search-btn" class="fas fa-search"></div>
+        {% if login %}
+        <a href="{%url 'requested' '1' %}" class="{% if notify %}notification{%endif%} fa-solid fa-bell">{% if notify %}<span class="badge">?</span>{%endif%}</a>
+
+        <a href="{% url 'logout'%}" title="Log-out" class="fa fa-sign-out"></a>
+        <a href="{%url 'profile'%}" title="Log-in" class="fas fa-user"></a>
+        <div id="login-btn"></div>
+        {% else %}
+        <button href="#" class="bton" id="login-btn"><i class="fa-solid fa-arrow-right-to-bracket"></i> Log in</button>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="header2">
+      <nav class="navbarg">
+        <a href="{% url 'home' %}">home</a>
+        <a href="{% url 'how-to-swap' %}">how to swap</a>
+        <a href="{% url 'browsing' %}">browse</a>
+        <a href="{% url 'blogs' %}">blogs</a>
+        <a href="{% url 'about_us' %}">about</a>
+        {%if login %}
+            <a href="{% url 'price_plan' %}">Price Plan</a>
+        {%endif%}
+      </nav>
+    </div>
+  </header>
+  <!-- header section ends -->
+
+  <!-- bottom navbar  -->
+
+  <nav class="bottom-navbar">
+    <a href="{%url 'home'%}" class="fas fa-home"></a>
+    <a href="{% url 'browsing' %}" class="fas fa-list"></a>
+    <a href="{% url 'how-to-swap' %}" class="fas fa-tags"></a>
+    <a href="{% url 'about_us' %}" class="fas fa-comments"></a>
+    <a href="{% url 'blogs' %}" class="fas fa-blog"></a>
+    {%if login %}
+      <a href="{% url 'price_plan' %}" class="fas fa-coins"></a>
+    {%endif%}
+  </nav>
+
+  <!-- login form  -->
+
+  <div class="login-form-container">
+    <div id="close-login-btn" class="fas fa-times"></div>
+
+    <form action="{%url 'home'%}" method="POST">
+      {% csrf_token %}
+      <h3>sign in</h3>
+      <span>Username</span>
+      <input type="text" name="username" class="box" placeholder="Enter your username" id="">
+      <span>Password</span>
+      <input type="password" name="password" class="box" placeholder="Enter your password" id="">
+      <div class="checkbox">
+        <input type="checkbox" name="" id="remember-me">
+        <label for="remember-me"> remember me</label>
+      </div>
+      <input type="submit" name="login" value="login" class="bton">
+      <p>don't have an account ? <a href="#" id="signup-btn2">create one</a></p>
+    </form>
+  </div>
+
+    <!-- about us starts-->
+    <div class="row headingg">
+        <div class="col1">
+            <img src="{% static 'image/a.png'%}" alt="bg">
+        </div>
+        <div class="col2">
+            <h1>
+                About Us
+            </h1>
+        </div>
+    </div>
+
+    <div class="about py-5">
+        <div class="container py-5">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 order-2 order-lg-1 writeup">
+                    <h1 class="display-4 font-weight-light">OUR MISSION</h1>
+                    <p class="font-italic text-muted mb-4">They says, "A book is not only a friend, it makes friends for
+                        you. When you have possessed a book with mind and spirit, you are enriched. But when you pass it
+                        on you are enriched threefold."</p>
+
+                    <p class="font-italic text-muted mb-4">Our mission is to spread the love of books to a wide
+                        community and make people engaged in this
+                        process musch as possible.</p>
+                </div>
+                <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2 picture"><img src="{% static 'image/b.png'%}" alt=""
+                        class="img-fluid mb-4 mb-lg-0"></div>
+            </div>
+        </div>
+        <div class="container py-5">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-5 px-6 mx-auto order-2 order-lg-1 video"><iframe width="600" height="400"
+                        src="https://www.youtube.com/embed/fqhSlTCw-Kg?&autoplay=1" title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    </iframe></div>
+                <div class="col-lg-6 order-1 order-lg-2 writeup" style="margin-left: 5%;">
+                    <h1 class="display-4 font-weight-light">OUR STORY</h1>
+                    <p class="font-italic text-muted mb-4">As fellow Under-graduate students at Chittagong University of
+                        Engineering & Technology in 2022, Ashfaq, Zerin & Tahlil Abrar noticed a shift in the way of
+                        people's admiration for books. They noticed that people are no longer interested in reading real
+                        books — instead, they are fond of reading PDF more often, which is also leading them to severe
+                        eye problems or chronic headaches. In excuse, they may point out the
+                        issue of buying cost or the hassle to buy and store books frequently.
+                    </p>
+                    <p class="font-italic text-muted mb-4">From this shift, an idea was born: BoiBondhu.
+                    </p>
+                    <p class="font-italic text-muted mb-4">Boi-bondhu is a place where one can give-away their old books
+                        to free up space for new ones.Thus
+                        they can save the buying cost. It's also hassle free, as the whole process is online. </p>
+                </div>
+
+            </div>
+        </div>
+        <div class="container py-5">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 order-2 order-lg-1 writeup">
+                    <h1 class="display-4 font-weight-light">OUR IMPACT</h1>
+                    <p class="font-italic text-muted mb-4">When a book travels from person to person, it not only
+                        enhances its reader's mind, but also leaves a good impact on nature.
+                        Paper production needs wood, and by re-using one book more than once, we are lessening
+                        deforestation at a certain level. Thus it's a green system.
+                    </p>
+
+                    <p class="font-italic text-muted mb-4">By exchanging books people are making a community of readers.
+                        This is helping them to build a
+                        quality full social relation.</p>
+                </div>
+                <div class="col-lg-3 px-3 mx-auto order-1 order-lg-2 picture"><img src="{% static 'image/c.png'%}" alt=""
+                        class="img-fluid mb-4 mb-lg-0"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="bg-light py-5">
+        <div class="container py-5">
+            <div class="row mb-4" style="text-align:center;">
+                <h2 class="display-4 font-weight-light">OUR TEAM</h2>
+                <p class="font-italic text-muted">Some Bookworms and Mastermind behind Boi-Bondhu</p>
+            </div>
+
+            <div class="row text-center">
+                <!-- Team item-->
+                <div class="col-xl-3 col-xl-4 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                            src="{% static 'image/team 1.jpg'%}"
+                            alt="" width="200" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h4 class="display-7 font-weight-light mb-2">Ashfaqur Rahman Adib</h4>
+                        <h3 class="display-7 font-weight-light mb-2">ID-1804055</h3>
+                        
+                        <ul class="social mb-0 list-inline mt-5">
+                            <li class="list-inline-item"><a href="https://web.facebook.com/boroadib/" class="social-link"><i
+                                        class="fa-brands fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.instagram.com/ashfaqur_adib/" class="social-link"><i
+                                        class="fa-brands fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i
+                                        class="fa-brands fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i
+                                        class="fa-brands fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End-->
+                <!-- Team item-->
+                <div class="col-xl-3 col-xl-4 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'image/Meem.jpg'%}" alt=""
+                            width="200" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h4 class="display-7 font-weight-light mb-2">Zerin Shaima Meem</h4>
+                        <h3 class="display-7 font-weight-light mb-2">ID-1804057</h3>
+                        
+                        <ul class="social mb-0 list-inline mt-5">
+                            <li class="list-inline-item"><a href="https://web.facebook.com/zerinshaimameem.meem" class="social-link"><i
+                                        class="fa-brands fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.instagram.com/zerinshaima/" class="social-link"><i
+                                        class="fa-brands fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i
+                                        class="fa-brands fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i
+                                        class="fa-brands fa-linkedin"></i></a></li>
+                        </ul>
+                        <!-- End-->
+                    </div>
+                </div>
+                <!-- Team item-->
+                <div class="col-xl-3 col-xl-4 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                            src="{% static 'image/team 3.jpg'%}"
+                            alt="" width="200" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h4 class="display-7 font-weight-light mb-2">Tahlil Abrar Siam</h4>
+                        <h4 class="display-7 font-weight-light mb-2">ID-1804056</h4>
+                        <ul class="social mb-0 list-inline mt-5">
+                            <li class="list-inline-item"><a href="https://web.facebook.com/tahlilsiam.siam" class="social-link"><i
+                                        class="fa-brands fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.instagram.com/tahlil_abrar/" class="social-link"><i
+                                        class="fa-brands fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i
+                                        class="fa-brands fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i
+                                        class="fa-brands fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End-->
+
+
+            </div>
+        </div>
+        <!-- about us ends-->
+        <!-- FOOTER -->
+        <!-- FOOTER -->
+        <footer class="w-100 py-4 flex-shrink-0">
+            <div class="container py-4">
+                <div class="row gy-4 gx-5">
+                    <div class="col-lg-4 col-md-6">
+                        <h5 class="h1 text-white">Our locations</h5>
+                        <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Chittagong">
+                            <i class="fas fa-map-marker-alt"></i> Chittagong
+                        </a>
+                        <p>
+                            <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+                            <a href="https://www.twitter.com/" class="fab fa-twitter"></a>
+                            <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+                            <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
+                            <a href="https://www.pinterest.com/" class="fab fa-pinterest"></a>
+                        </p>
+                        <p class="small text-muted mb-0">
+                            &copy; Copyrights. All rights reserved.
+                        </p>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <h5 class="text-white mb-3">Quick links</h5>
+                        <ul class="list-unstyled text-mut">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Get started</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <h5 class="text-white mb-3">Contributor</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fa-solid fa-person"></i> Ashfaqur Rahman Adib </a></li>
+                            <li><i class="fa-solid fa-person"></i> Tahlil Abrar </a></li>
+                            <li><i class="fa-solid fa-person-dress"></i> Zerin Shaima Meem </a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <h5 class="text-white mb-3">Newsletter</h5>
+                        <p class="small text-mut">
+                            Send us your valuable constructive feedback.
+                        </p>
+                        <form action="#">
+                            <div class="input-group mb-3">
+                                <input class="form-control" type="text" placeholder="Send your feedback"
+                                    aria-label="Recipient's username" aria-describedby="button-addon2" />
+                                <button class="btn btn-primary" id="button-addon2" type="button">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+        <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"></script>
+        <!-- custom js file link  -->
+        <script src="{%static 'about us/script.js'%}"></script>
+</body>
+
+</html>
