@@ -56,7 +56,7 @@ following state diagram:
   ![Homepage Before Sign-Up ](readmeImages/HomePageBeforeSignup.jpg)
   After signup, it will give a welcome message. 
   
-  ![Home Page After Sign-Up ](readmeImages/HomePageAfterSign-Up.jpg)
+  ![Home Page After Sign-Up ](readmeImages/HomePageAfterSignUp.jpg)
 
   ### How to Swap
   This page gives the brief idea of using the web application step by step. The page is divided 
@@ -79,7 +79,7 @@ following state diagram:
 
   ### About Us
   This is a page where users can learn about our goals and us, the creators of this application.
-  ![About US Page With Developer Information](readmeImages/aboutUs.jpg)
+  ![About US Page With Developer Information](readmeImages/aboutUS.jpg)
 
   ### Pricing Plan
   This page shows our pricing plans and one can submit coupons here, to buy coins. Users can 
@@ -103,7 +103,7 @@ Shows list of books that the user received successfully already.
 ![The Books Received by User ](readmeImages/TheBooksReceivedbyUser.jpg)
 #### Books Giveaway 
 Shows list of books that the user has shared till date.
-![The Books Giveaway by User](readmeImages/TheBooksGivaawaybyUser.jpg)
+![The Books Giveaway by User](readmeImages/TheBooksGiveawaybyUser.jpg)
 #### My Request 
 Shows list of books that user have sent request for, but still isn’t accepted. 
 ![The Books Request to Acquire by User](readmeImages/TheBooksRequesttoAcquirebyUser.jpg)
@@ -117,18 +117,11 @@ the user that requested.
 #### Waiting 
 Shows list of books that users have been waiting for. A confirmation button is given for 
 making sure they received the book. 
-![Waiting Lists of User](readmeImages/WaitingListofUser.jpg)
+![Waiting Lists of User](readmeImages/WaitingListsofUser.jpg)
 #### My Posts 
 Shows list of books that have been posted. Users can delete them if they want to.
 ![Books Lists of Uploaded Books](readmeImages/booksListsOfUploadedBooks.jpg)
-  
-- [How to Swap](#How-to-swap)
-- [Browse](#Browse)
-- [Blogs](#Blogs)
-- [About Us](#About-Us)
-- [Pricing Plan](#Pricing-Plan)
-- [Profile](#Profile)
-- [My Books](#My-Books)
+
 
 ## Features
 - [Sign-up](#sign-up)
