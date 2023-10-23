@@ -180,12 +180,12 @@ in the homepage.
 #### Password Too Short
 
 If the password match and then the password length is less than 8 characters this error message would be shown.
-![Too Short Password](readmeImages/TooShortPassword.jpg.jpg)
+![Too Short Password](readmeImages/TooShortPassword.jpg)
 
 ### LOG-IN
 
 If an existing user incorrectly enter his username or password this verdict will be shown.
-![Incorrect Username or Password](readmeImages/IncorrectUsernameorPassword.jpg.jpg)
+![Incorrect Username or Password](readmeImages/IncorrectUsernameorPassword.jpg)
 
 ### SEARCH RESULT
 
@@ -193,24 +193,24 @@ If an existing user incorrectly enter his username or password this verdict will
 
 A user can search for different types of books by entering keywords in the search bar. The
 books with that keyword in their title will be shown.
-![Keyword Search Result](readmeImages/KeywordSearchResult.jpg.jpg)
+![Keyword Search Result](readmeImages/KeywordSearchResult.jpg)
 
 #### No Result found
 
 If a user enters a keyword that doesn’t match with any of the books in database than their will be shown “No Result Found”.
-![No result found](readmeImages/NoResultFound.jpg.jpg)
+![No result found](readmeImages/NoResultFound.jpg)
 
 ### NOTIFICATION ALERT
 
 For a book request from other users a notification will be shown in top of the page.
-![Notification Alert](readmeImages/NotificationAlert.jpg.jpg)
+![Notification Alert](readmeImages/NotificationAlert.jpg)
 
 ### BUTTON DISABLE
 
 When a user tries to request any books from browsing page without logged in, they can’t do it.
 The buttons will be disable for them. Similar thing happened when an owner also tries to
 request his own book.
-![Button Disable](readmeImages/ButtonDisable.jpg.jpg)
+![Button Disable](readmeImages/ButtonDisable.jpg)
 
 ### CUPONS
 
@@ -218,16 +218,16 @@ request his own book.
 
 When a user input correct coupon then the user will get his confirmation message. An
 automatically coin will be added in their vault.
-![Confirmation of Purchase](readmeImages/ConfirmationofPurchase.jpg.jpg)
+![Confirmation of Purchase](readmeImages/ConfirmationofPurchase.jpg)
 
 #### Incorrect Coupon
 
 When a user adds incorrect coupon in the coupon bar then an error message indicate that the
 coupon is not currently available.
-![Coupon Unavailable](readmeImages/CouponUnavailable.jpg.jpg)
+![Coupon Unavailable](readmeImages/CouponUnavailable.jpg)
 
 ### COIN SHORTAGE
 
 When a user tries to request a book whose coin price is greater than his currently held coins
 than the request wouldn’t be performed and the following verdict will be shown.
-![Shortage of Coins](readmeImages/ShortageofCoins.jpg.jpg)
+![Shortage of Coins](readmeImages/ShortageofCoins.jpg)
