@@ -52,21 +52,17 @@ diagram of our web application:
 ![Database Schema](readmeImages/DatabaseSchema.jpg)
 
 ## Book State Diagram
+When a user add books as posts it has many stages which we describe in Fig 2.2 as states. This state diagram helps us to design books/user interaction. Those states are given here in the following state diagram:
 
-When a user add books as posts it has many stages which we describe in Fig 2.2 as states. This
-state diagram helps us to design books/user interaction. Those states are given here in the
-following state diagram:
 ![Books State Diagram](readmeImages/BooksStateDiagram.jpg)
 
 ## User interface
-
 ### Home Page
-
 Before signup, this page will give a brief introduction about the application. When a user signs up for the first time he would be given 500 coins as a sign-up bonus.
-
+#### Before Sign-Up
 ![Homepage Before Sign-Up ](readmeImages/HomePageBeforeSignup.jpg)
-After signup, it will give a welcome message.
-
+After Sign-Up, it will give a welcome message.
+#### After Sign-Up
 ![Home Page After Sign-Up ](readmeImages/HomePageAfterSignUp.jpg)
 
 ### How to Swap
@@ -108,11 +104,13 @@ enter coupons to redeem coins which are given in many special offers.
 In this page all the information about the user is shown. Also, users can see how many coins
 they got, the number of books received and the number of books shared. On the lower right
 corner there is a button for adding books for sharing.
+
 ![User Profile Page ](readmeImages/UserProfilePage.jpg)
 
 ### Add Books
 
 A form to upload books into the database.
+
 ![Add books Form](readmeImages/addBooksForm.jpg)
 
 ### My Books
@@ -123,111 +121,100 @@ activity with other users and different books.
 #### Books Received
 
 Shows list of books that the user received successfully already.
+
 ![The Books Received by User ](readmeImages/TheBooksReceivedbyUser.jpg)
 
 #### Books Giveaway
-
 Shows list of books that the user has shared till date.
+
 ![The Books Giveaway by User](readmeImages/TheBooksGiveawaybyUser.jpg)
 
 #### My Request
-
 Shows list of books that user have sent request for, but still isn’t accepted.
 ![The Books Request to Acquire by User](readmeImages/TheBooksRequesttoAcquirebyUser.jpg)
 
 #### New Request
-
 Shows list of books that users have received requests for, but haven’t accepted or declined yet. Users can also see who has requested that book.
+
 ![New Request of Books ](readmeImages/NewRequestofBooks.jpg)
 
 #### Pending
-
 Shows list of books that users have sent requests for and is accepted, but yet not received by
 the user that requested.
+
 ![Pending Requests](readmeImages/PendingRequests.jpg)
 
 #### Waiting
+Shows list of books that users have been waiting for. A confirmation button is given for making sure they received the book.
 
-Shows list of books that users have been waiting for. A confirmation button is given for
-making sure they received the book.
 ![Waiting Lists of User](readmeImages/WaitingListsofUser.jpg)
 
 #### My Posts
-
 Shows list of books that have been posted. Users can delete them if they want to.
+
 ![Books Lists of Uploaded Books](readmeImages/booksListsOfUploadedBooks.jpg)
 
 ## Features
-
-### SIGN-UP
-
+### Sign-Up
 #### Empty Form
-
 A new user can not submit an empty form. Every filed in the form has to be filled up. Otherwise this following pop up message will be shown.
+
 ![Sign-Up Empty Form Verdict](readmeImages/SignUpEmptyFormVerdict.jpg)
 
 #### Existing Username
 
 When a user inputs a username that is already in the database for other profile there will be an alert message. So, every username must be unique.
+
 ![Sign-Up Existing Username](readmeImages/SignUpExistingUsername.jpg)
 
 #### Incorrect Password
+When the password fields do not match with each other there would be shown an error message in the homepage.
 
-When the password fields do not match with each other there would be shown an error message
-in the homepage.
 ![Incorrect Password Verdict](readmeImages/IncorrectUsernameorPassword.jpg)
 
 #### Password Too Short
-
 If the password match and then the password length is less than 8 characters this error message would be shown.
+
 ![Too Short Password](readmeImages/TooShortPassword.jpg)
 
-### LOG-IN
-
+### Log-In
 If an existing user incorrectly enter his username or password this verdict will be shown.
+
 ![Incorrect Username or Password](readmeImages/IncorrectUsernameorPassword.jpg)
 
 ### SEARCH RESULT
-
 #### Keyword Searching
+A user can search for different types of books by entering keywords in the search bar. The books with that keyword in their title will be shown.
 
-A user can search for different types of books by entering keywords in the search bar. The
-books with that keyword in their title will be shown.
 ![Keyword Search Result](readmeImages/KeywordSearchResult.jpg)
 
 #### No Result found
-
 If a user enters a keyword that doesn’t match with any of the books in database than their will be shown “No Result Found”.
+
 ![No result found](readmeImages/NoResultFound.jpg)
 
-### NOTIFICATION ALERT
-
+### Notification Alert
 For a book request from other users a notification will be shown in top of the page.
+
 ![Notification Alert](readmeImages/NotificationAlert.jpg)
 
-### BUTTON DISABLE
+### Button Disable
+When a user tries to request any books from browsing page without logged in, they can’t do it. The buttons will be disable for them. Similar thing happened when an owner also tries to request his own book.
 
-When a user tries to request any books from browsing page without logged in, they can’t do it.
-The buttons will be disable for them. Similar thing happened when an owner also tries to
-request his own book.
 ![Button Disable](readmeImages/ButtonDisable.jpg)
 
-### CUPONS
-
+### Cupons
 #### Coin Addition
+When a user input correct coupon then the user will get his confirmation message. An automatically coin will be added in their vault.
 
-When a user input correct coupon then the user will get his confirmation message. An
-automatically coin will be added in their vault.
 ![Confirmation of Purchase](readmeImages/ConfirmationofPurchase.jpg)
 
 #### Incorrect Coupon
+When a user adds incorrect coupon in the coupon bar then an error message indicate that the coupon is not currently available.
 
-When a user adds incorrect coupon in the coupon bar then an error message indicate that the
-coupon is not currently available.
 ![Coupon Unavailable](readmeImages/CouponUnavailable.jpg)
 
-### COIN SHORTAGE
+### Coin Shortage
+When a user tries to request a book whose coin price is greater than his currently held coins than the request wouldn’t be performed and the following verdict will be shown.
 
-When a user tries to request a book whose coin price is greater than his currently held coins
-than the request wouldn’t be performed and the following verdict will be shown.
 ![Shortage of Coins](readmeImages/ShortageofCoins.jpg)
