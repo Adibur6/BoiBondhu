@@ -4,3 +4,42 @@
  <h1 align="center">Boi Bondhu</h2>
  <p align="center">“Boi-Bondhu”. A platform to share and recieve old bookswithin your community!</p>
 </p>
+
+## Team Members:
+* Ashfaqur Rahman Adib- 1804055
+* Tahlil Abrar- 1804056
+* Zerin Shaima Meem- 1804057
+
+## Required Technologies
+* HTML
+* CSS
+* SASS
+* JavaScript
+* JQuery
+* Swiper JS
+* Bootstrap
+* Django Python with SQLite
+
+## Data Base Design
+We used a relational database SQLite for the backend of our web application. The database 
+design of the website took 8 entities with their appropriate attributes. The following is the 
+diagram of our web application:
+![Database Schema](Readme Images/Database Schema.jpg)
+
+## Pages
+- [Home Page](#Home-Page)
+- [How to Swap](#How-to-swap)
+- [Browse](#Browse)
+- [Blogs](#Blogs)
+- [About Us](#About-Us)
+- [Pricing Plan](#Pricing-Plan)
+- [Profile](#Profile)
+- [My Books](#My-Books)
+
+## Features
+- [Sign-up](#sign-up)
+- [Log-in](#Log-in)
+- [Notification alert](#Notification-alert)
+- [Button Disable](#Button-Disable)
+- [Coupons](#Coupons)
+- [Coin Shortage](#Coin-Shortage)
